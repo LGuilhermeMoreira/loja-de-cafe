@@ -1,6 +1,9 @@
 package configuration
 
-import "os"
+import (
+	"os"
+	"strconv"
+)
 
 type EnvData struct {
 	DBHost    string
@@ -8,20 +11,22 @@ type EnvData struct {
 	DBUser    string
 	DBPass    string
 	DBName    string
-	Port      string
+	Port      int
 	JWTSecret string
-	JWTTime   string
+	JWTTime   int
 }
 
 func NewEnvData() EnvData {
+	jwtTime, _ := strconv.Atoi(os.Getenv("JWT_TIME"))
+	port, _ := strconv.Atoi(os.Getenv("PORT"))
 	return EnvData{
 		DBHost:    os.Getenv("DB_HOST"),
 		DBPort:    os.Getenv("DB_PORT"),
 		DBUser:    os.Getenv("DB_USER"),
 		DBPass:    os.Getenv("DB_PASS"),
 		DBName:    os.Getenv("DB_NAME"),
-		Port:      os.Getenv("PORT"),
+		Port:      port,
 		JWTSecret: os.Getenv("JWT_SECRET"),
-		JWTTime:   os.Getenv("JWT_TIME"),
+		JWTTime:   jwtTime,
 	}
 }

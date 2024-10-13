@@ -2,14 +2,20 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"github.com/LGuilhermeMoreira/loja-de-cafe/configuration"
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/infra/database/connection"
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/infra/database/migration"
+	"github.com/LGuilhermeMoreira/loja-de-cafe/route"
 	"github.com/joho/godotenv"
+	"net/http"
 )
 
 func main() {
-	godotenv.Load()
+	err := godotenv.Load()
+	if err != nil {
+		panic(err)
+	}
 	envData := configuration.NewEnvData()
 	db, err := connection.NewConnection(envData)
 	if err != nil {
@@ -19,4 +25,11 @@ func main() {
 	if err != nil {
 		panic(errors.New("error running migrations"))
 	}
+	mux := route.NewMux(db, envData.JWTSecret, envData.JWTTime)
+	srv := &http.Server{
+		Addr:    fmt.Sprintf(":%v", envData.Port),
+		Handler: mux,
+	}
+	err = srv.ListenAndServe()
+	panic(err)
 }
