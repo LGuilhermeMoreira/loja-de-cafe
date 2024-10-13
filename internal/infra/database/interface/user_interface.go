@@ -6,5 +6,5 @@ import (
 
 type UserInterface interface {
 	Create(user dto.InputCreateUser) (*dto.OutputUser, error)
-	Login(email string, password string) (bool, error)
+	Login(email string, password string) (*dto.OutputUser, error)
 }

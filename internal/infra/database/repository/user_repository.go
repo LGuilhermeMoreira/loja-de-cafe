@@ -31,12 +31,16 @@ func (u *User) Create(input dto.InputCreateUser) (*dto.OutputUser, error) {
 	return &output, nil
 }
 
-func (u *User) Login(email, password string) (bool, error) {
+func (u *User) Login(email, password string) (*dto.OutputUser, error) {
 	var user model.User
 	err := u.DB.Where("email = ?", email).First(&user).Error
 	if err != nil {
-		return false, err
+		return nil, err
 	}
 	err = bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(password))
-	return err == nil, nil
+	var output dto.OutputUser
+	output.Email = user.Email
+	output.Name = user.Name
+	output.ID = user.Id
+	return &output, nil
 }

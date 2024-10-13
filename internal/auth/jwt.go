@@ -9,20 +9,18 @@ import (
 type JWT[T Models] struct {
 	Secret  string
 	Timeout int
-	Model   T
 }
 
-func NewJWT[T Models](secret string, timeout int, model T) *JWT[T] {
+func NewJWT[T Models](secret string, timeout int) *JWT[T] {
 	return &JWT[T]{
 		Secret:  secret,
 		Timeout: timeout,
-		Model:   model,
 	}
 }
 
-func (j *JWT[T]) GenerateToken() (string, error) {
+func (j *JWT[T]) GenerateToken(data T) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
-		"data": j.Model,
+		"data": data,
 		"exp":  time.Now().Add(time.Hour * time.Duration(j.Timeout)).Unix(),
 	})
 

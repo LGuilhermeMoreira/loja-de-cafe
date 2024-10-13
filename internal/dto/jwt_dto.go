@@ -1,5 +1,5 @@
 package dto
 
-type JWTOutput struct {
+type JWTOutputDto struct {
 	Token string `json:"token"`
 }

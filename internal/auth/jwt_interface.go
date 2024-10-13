@@ -4,10 +4,10 @@ import "github.com/LGuilhermeMoreira/loja-de-cafe/internal/dto"
 
 type Models interface {
 	dto.OutputUser
-	// add outher implementation
+	// add another implementation
 }
 
 type JWTInterface[T Models] interface {
-	GenerateToken() (string, error)
+	GenerateToken(data T) (string, error)
 	ValidateToken(token string) error
 }

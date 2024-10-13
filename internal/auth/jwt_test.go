@@ -15,12 +15,13 @@ func TestJWT(t *testing.T) {
 	godotenv.Load("../../.env")
 	value, err := strconv.Atoi(os.Getenv("JWT_TIME"))
 	assert.Nil(t, err)
-	jwtData := auth.NewJWT[dto.OutputUser](os.Getenv("JWT_SECRET"), value, dto.OutputUser{
+	jwtData := auth.NewJWT[dto.OutputUser](os.Getenv("JWT_SECRET"), value)
+
+	tokenString, err := jwtData.GenerateToken(dto.OutputUser{
 		Name:  "test",
 		Email: "test@email.com",
 		ID:    uuid.New(),
 	})
-	tokenString, err := jwtData.GenerateToken()
 	assert.Nil(t, err)
 	assert.NotEmpty(t, tokenString)
 	err = jwtData.ValidateToken(tokenString)
