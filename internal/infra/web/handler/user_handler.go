@@ -34,7 +34,7 @@ func (u *UserHandler) CreateUser(ctx *gin.Context) {
 			gin.H{"error": err.Error()})
 		return
 	}
-	ctx.JSON(http.StatusOK, response)
+	ctx.JSON(http.StatusCreated, response)
 }
 
 func (u *UserHandler) Login(ctx *gin.Context) {
@@ -61,4 +61,29 @@ func (u *UserHandler) Login(ctx *gin.Context) {
 		Token: tokenString,
 	}
 	ctx.JSON(http.StatusOK, response)
+}
+
+func (u *UserHandler) UpdateUser(ctx *gin.Context) {
+	var requestBody dto.InputUpdateUser
+	err := json.NewDecoder(ctx.Request.Body).Decode(&requestBody)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest,
+			gin.H{"error": err.Error()})
+		return
+	}
+	id := ctx.Param("id")
+	if id == "" {
+		ctx.JSON(http.StatusBadRequest,
+			gin.H{"error": "id is required"})
+		return
+	}
+	response, err := u.UserInterface.Update(id, requestBody)
+	if err != nil {
+		ctx.JSON(http.StatusInternalServerError,
+			gin.H{"error": err.Error()})
+		return
+	}
+	ctx.JSON(http.StatusOK,
+		response,
+	)
 }

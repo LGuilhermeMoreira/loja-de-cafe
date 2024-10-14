@@ -1,0 +1,32 @@
+# update this variables
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiYmZhM2UwMmEtNjAyNi00ZDQ3LTk0YTgtYWE2NDg0MGRkODRlIiwibmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAZW1haWwuY29tIn0sImV4cCI6MTcyODkyMjg2Mn0.0sgE2FFwnzZg2T3ulbh7f55Pc-EY0oGOcjzmp_jqs-0
+@id = bfa3e02a-6026-4d47-94a8-aa64840dd84e
+
+### criar usuario
+POST http://localhost:3000/user
+Content-Type: application/json
+
+{
+  "name" : "test",
+  "email" : "test@email.com",
+  "password" : "test"
+}
+
+### login
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email" : "test@email.com",
+  "password" : "test"
+}
+
+### atualizar usuario
+PUT http://localhost:3000/user/{{id}}
+Content-Type: application/json
+Authorization: {{authToken}}
+
+{
+  "name" : "test updated",
+  "password" : "test updated"
+}
