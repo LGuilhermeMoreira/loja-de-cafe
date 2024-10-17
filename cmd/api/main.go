@@ -9,10 +9,16 @@ import (
 	"github.com/LGuilhermeMoreira/loja-de-cafe/route"
 	"github.com/joho/godotenv"
 	"net/http"
+	"os"
 )
 
 func main() {
-	err := godotenv.Load()
+	// image bucket
+	err := os.MkdirAll("./images", 0755)
+	if err != nil {
+		panic(errors.New("error creating image bucket"))
+	}
+	err = godotenv.Load()
 	if err != nil {
 		panic(err)
 	}

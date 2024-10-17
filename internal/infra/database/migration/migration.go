@@ -7,6 +7,7 @@ import (
 
 var models = []interface{}{
 	model.User{},
+	model.Coffee{},
 }
 
 func Migration(db *gorm.DB) error {
