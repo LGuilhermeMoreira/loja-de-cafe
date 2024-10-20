@@ -11,11 +11,19 @@ var models = []interface{}{
 }
 
 func Migration(db *gorm.DB) error {
-	for _, model := range models {
-		err := db.AutoMigrate(model)
+	for _, m := range models {
+		err := db.AutoMigrate(m)
 		if err != nil {
 			return err
 		}
 	}
 	return nil
+}
+
+func InitUserToTest(db *gorm.DB) error {
+	usr, err := model.NewUser("test", "test@test", "test", true)
+	if err != nil {
+		return err
+	}
+	return db.Create(usr).Error
 }

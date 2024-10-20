@@ -20,17 +20,17 @@ func NewConnection(envData configuration.EnvData) (*gorm.DB, error) {
 		envData.DBPass,
 		envData.DBName,
 	)
-	log.Println("dns: ", dns)
 	count := 0
 	for {
 		if count >= 5 {
 			return nil, errors.New("try 5 times to connect to database and failed")
 		}
-		log.Println("time: ", count)
 		db, err := gorm.Open(postgres.Open(dns), &gorm.Config{})
 		if err == nil {
+			log.Println("connected to database")
 			return db, nil
 		}
+		log.Println("time: ", count)
 		time.Sleep(2 * time.Second)
 		count++
 	}

@@ -53,5 +53,47 @@ func (j *JWT[T]) ValidateToken(tokenString string) error {
 	if time.Now().After(expTime) {
 		return errors.New("token expired")
 	}
+	_, ok = claims["data"]
+	if !ok {
+		return errors.New("invalid data claim")
+	}
+	return nil
+}
+
+func (j *JWT[T]) ValidateTokenAdmin(tokenString string) error {
+	tokenJWT, err := jwt.Parse(tokenString, j.getSecret)
+	if err != nil {
+		return err
+	}
+	if !tokenJWT.Valid {
+		return jwt.ErrSignatureInvalid
+	}
+	claims, ok := tokenJWT.Claims.(jwt.MapClaims)
+	if !ok {
+		return errors.New("invalid token claims")
+	}
+	exp, ok := claims["exp"].(float64)
+	if !ok {
+		return errors.New("invalid expiration claim")
+	}
+	expTime := time.Unix(int64(exp), 0)
+	if time.Now().After(expTime) {
+		return errors.New("token expired")
+	}
+	data, ok := claims["data"]
+	if !ok {
+		return errors.New("invalid data claim")
+	}
+	usr, ok := data.(map[string]any)
+	if !ok {
+		return errors.New("invalid data claim")
+	}
+	isAdmin, ok := usr["admin"].(bool)
+	if !ok {
+		return errors.New("invalid data claim")
+	}
+	if !isAdmin {
+		return errors.New("invalid admin")
+	}
 	return nil
 }

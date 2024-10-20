@@ -6,6 +6,7 @@ type OutputUser struct {
 	ID    uuid.UUID `json:"id"`
 	Name  string    `json:"name"`
 	Email string    `json:"email"`
+	Admin bool      `json:"admin"`
 }
 
 type InputCreateUser struct {

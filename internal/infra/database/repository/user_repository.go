@@ -28,6 +28,7 @@ func (u *User) Create(input dto.InputCreateUser) (*dto.OutputUser, error) {
 	output.Email = user.Email
 	output.Name = user.Name
 	output.ID = user.Id
+	output.Admin = user.Admin
 	return &output, nil
 }
 
@@ -42,6 +43,7 @@ func (u *User) Login(email, password string) (*dto.OutputUser, error) {
 	output.Email = user.Email
 	output.Name = user.Name
 	output.ID = user.Id
+	output.Admin = user.Admin
 	return &output, nil
 }
 
@@ -66,5 +68,6 @@ func (u *User) Update(id string, input dto.InputUpdateUser) (*dto.OutputUser, er
 	output.Email = user.Email
 	output.Name = user.Name
 	output.ID = user.Id
+	output.Admin = user.Admin
 	return &output, nil
 }

@@ -10,4 +10,5 @@ type Models interface {
 type JWTInterface[T Models] interface {
 	GenerateToken(data T) (string, error)
 	ValidateToken(token string) error
+	ValidateTokenAdmin(token string) error
 }

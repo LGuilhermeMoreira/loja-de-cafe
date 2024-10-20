@@ -11,7 +11,7 @@ func SaveImage(data, filePath, label string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	name := filePath + label + ".svg"
+	name := filePath + label + ".jpeg"
 	err = os.WriteFile(name, imageData, os.ModePerm)
 	if err != nil {
 		return "", err

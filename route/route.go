@@ -13,17 +13,22 @@ func NewMux(db *gorm.DB, secret string, time int) *gin.Engine {
 	//jwt
 	JWT := auth.NewJWT(secret, time)
 	// middlware
-	f := middleware.NewFields(secret, time)
+	mw := middleware.NewFields(secret, time)
 	// user
 	userRepository := repository.NewUserRepository(db)
 	userHandler := handler.NewUserHandler(userRepository, JWT)
+	// coffee
+	coffeeRepository := repository.NewCoffeeRepository(db)
+	coffeeHandler := handler.NewCoffeeHandler(coffeeRepository, JWT)
 
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()
-	r.Use(f.LogRequest())
+	//user
 	r.GET("ping", handler.Status)
 	r.POST("/user", userHandler.CreateUser)
-	r.PUT("/user/:id", f.ValidateToken(), userHandler.UpdateUser)
+	r.PUT("/user/:id", mw.ValidateToken(), userHandler.UpdateUser)
 	r.POST("/login", userHandler.Login)
+	//coffee
+	r.POST("/coffee/", mw.ValidateTokenAdmin(), coffeeHandler.CreateCoffee)
 	return r
 }

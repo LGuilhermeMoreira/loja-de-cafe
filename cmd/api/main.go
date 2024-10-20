@@ -27,6 +27,12 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	if envData.InProduction == false {
+		err = migration.InitUserToTest(db)
+		if err != nil {
+			panic(err)
+		}
+	}
 	err = migration.Migration(db)
 	if err != nil {
 		panic(errors.New("error running migrations"))

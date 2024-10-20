@@ -35,6 +35,23 @@ func (f filds) ValidateToken() gin.HandlerFunc {
 	}
 }
 
+func (f filds) ValidateTokenAdmin() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		token := c.GetHeader("Authorization")
+		if token == "" {
+			c.AbortWithStatusJSON(401, gin.H{"error": "Token is missing"})
+			return
+		}
+		tokenString := strings.Split(token, " ")[1]
+		err := f.jwt.ValidateTokenAdmin(tokenString)
+		if err != nil {
+			c.AbortWithStatusJSON(401, gin.H{"error": err.Error()})
+			return
+		}
+		c.Next()
+	}
+}
+
 func (f filds) LogRequest() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		log.Printf("🆕%s ➡️%s 🌎%s\n", c.Request.Method, c.Request.RequestURI, c.ClientIP())

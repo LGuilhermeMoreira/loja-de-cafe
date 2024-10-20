@@ -90,7 +90,7 @@ func (c *Coffee) FindAll(pagination, limit int, sort string) ([]dto.OutputCoffee
 	}
 	return response, nil
 }
-func (c *Coffee) FindByID(id uuid.UUID) (*dto.OutputCoffee, error) {
+func (c *Coffee) FindById(id uuid.UUID) (*dto.OutputCoffee, error) {
 	coffee, err := c.isValid(id)
 	if err != nil {
 		return nil, err

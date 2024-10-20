@@ -4,14 +4,15 @@ import (
 	"github.com/LGuilhermeMoreira/loja-de-cafe/configuration"
 	"github.com/joho/godotenv"
 	"github.com/stretchr/testify/assert"
+	"log"
 	"testing"
 )
 
 func TestNewEnvData(t *testing.T) {
-	godotenv.Load("../.env")
-
+	err := godotenv.Load("../.env")
+	assert.Nil(t, err)
 	envData := configuration.NewEnvData()
-
+	log.Println(envData)
 	assert.NotEmpty(t, envData)
 	//api
 	assert.NotEmpty(t, envData.Port)
@@ -24,5 +25,5 @@ func TestNewEnvData(t *testing.T) {
 	//auth
 	assert.NotEmpty(t, envData.JWTSecret)
 	assert.NotEmpty(t, envData.JWTTime)
-
+	assert.IsType(t, true, envData.InProduction)
 }
