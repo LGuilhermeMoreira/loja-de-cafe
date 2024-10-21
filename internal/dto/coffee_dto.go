@@ -1,8 +1,10 @@
 package dto
 
+import "github.com/google/uuid"
+
 type OutputCoffee struct {
 	Name        string  `json:"name"`
-	Prince      float64 `json:"prince"`
+	Price       float64 `json:"price"`
 	Id          string  `json:"id"`
 	Description string  `json:"description"`
 	Data        string  `json:"data"` // base64
@@ -10,15 +12,16 @@ type OutputCoffee struct {
 
 type InputCreateCoffee struct {
 	Name        string  `json:"name"`
-	Prince      float64 `json:"prince"`
+	Price       float64 `json:"price"`
 	Description string  `json:"description"`
 	LabelFile   string  `json:"label_file"`
 	Data        string  `json:"data"`
 }
 
 type InputUpdateCoffee struct {
-	Name        string  `json:"name"`
-	Prince      float64 `json:"prince"`
-	Description string  `json:"description"`
-	Data        string  `json:"data"`
+	Name        string    `json:"name"`
+	Price       float64   `json:"price"`
+	Description string    `json:"description"`
+	Data        string    `json:"data"`
+	ID          uuid.UUID `uri:"id" binding:"required,uuid"`
 }

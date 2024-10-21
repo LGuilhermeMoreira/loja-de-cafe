@@ -19,11 +19,3 @@ func Migration(db *gorm.DB) error {
 	}
 	return nil
 }
-
-func InitUserToTest(db *gorm.DB) error {
-	usr, err := model.NewUser("test", "test@test", "test", true)
-	if err != nil {
-		return err
-	}
-	return db.Create(usr).Error
-}

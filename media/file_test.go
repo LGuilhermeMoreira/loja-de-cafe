@@ -1,9 +1,9 @@
-package utils_test
+package media_test
 
 import (
 	"encoding/base64"
 	"encoding/json"
-	"github.com/LGuilhermeMoreira/loja-de-cafe/utils"
+	"github.com/LGuilhermeMoreira/loja-de-cafe/media"
 	"github.com/stretchr/testify/assert"
 	"io"
 	"net/http"
@@ -38,15 +38,15 @@ func getData() string {
 }
 
 func TestGetBase64(t *testing.T) {
-	_, err := utils.SaveImage(getData(), path, "imagem_test")
+	_, err := media.SaveImage(getData(), path, "imagem_test")
 	assert.Nil(t, err)
 }
 
 func TestSaveImage(t *testing.T) {
 	data := getData()
-	pathImage, err := utils.SaveImage(data, path, "imagem_test")
+	pathImage, err := media.SaveImage(data, path, "imagem_test")
 	assert.Nil(t, err)
-	base64 := utils.GetBase64(pathImage)
+	base64 := media.GetBase64(pathImage)
 	if base64 == "" {
 		t.Fatal("base64 is empty")
 	}

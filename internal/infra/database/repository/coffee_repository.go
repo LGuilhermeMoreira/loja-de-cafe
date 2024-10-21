@@ -3,9 +3,13 @@ package repository
 import (
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/dto"
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/model"
-	"github.com/LGuilhermeMoreira/loja-de-cafe/utils"
+	"github.com/LGuilhermeMoreira/loja-de-cafe/media"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+)
+
+const (
+	localPath = "./images/"
 )
 
 type Coffee struct {
@@ -25,9 +29,13 @@ func (c *Coffee) isValid(id uuid.UUID) (*model.Coffee, error) {
 	return &coffee, nil
 }
 
-func (c *Coffee) Create(input dto.InputCreateCoffee, path string) (*dto.OutputCoffee, error) {
-	coffee := model.NewCoffee(input.Prince, input.Description, path, input.Name)
-	err := c.DB.Create(&coffee).Error
+func (c *Coffee) Create(input dto.InputCreateCoffee) (*dto.OutputCoffee, error) {
+	path, err := media.SaveImage(input.Data, localPath, input.LabelFile)
+	if err != nil {
+		return nil, err
+	}
+	coffee := model.NewCoffee(input.Price, input.Description, path, input.Name)
+	err = c.DB.Create(&coffee).Error
 	if err != nil {
 		return nil, err
 	}
@@ -35,7 +43,7 @@ func (c *Coffee) Create(input dto.InputCreateCoffee, path string) (*dto.OutputCo
 		Name:        coffee.Name,
 		Id:          coffee.ID.String(),
 		Description: coffee.Description,
-		Prince:      coffee.Price,
+		Price:       coffee.Price,
 		Data:        input.Data,
 	}
 	return &response, nil
@@ -46,8 +54,8 @@ func (c *Coffee) Update(input dto.InputUpdateCoffee, id uuid.UUID) (*dto.OutputC
 	if err != nil {
 		return nil, err
 	}
-
-	coffee.Price = input.Prince
+	media.UpdateImage(input.Data, coffee.ImagePath)
+	coffee.Price = input.Price
 	coffee.Name = input.Name
 	coffee.Description = input.Description
 
@@ -59,8 +67,8 @@ func (c *Coffee) Update(input dto.InputUpdateCoffee, id uuid.UUID) (*dto.OutputC
 		Name:        coffee.Name,
 		Id:          coffee.ID.String(),
 		Description: coffee.Description,
-		Prince:      coffee.Price,
-		Data:        utils.GetBase64(coffee.ImagePath),
+		Price:       coffee.Price,
+		Data:        input.Data,
 	}
 	return &response, nil
 }
@@ -84,8 +92,8 @@ func (c *Coffee) FindAll(pagination, limit int, sort string) ([]dto.OutputCoffee
 			Name:        c.Name,
 			Id:          c.ID.String(),
 			Description: c.Description,
-			Prince:      c.Price,
-			Data:        utils.GetBase64(c.ImagePath),
+			Price:       c.Price,
+			Data:        media.GetBase64(c.ImagePath),
 		}
 	}
 	return response, nil
@@ -99,8 +107,8 @@ func (c *Coffee) FindById(id uuid.UUID) (*dto.OutputCoffee, error) {
 		Name:        coffee.Name,
 		Id:          coffee.ID.String(),
 		Description: coffee.Description,
-		Prince:      coffee.Price,
-		Data:        utils.GetBase64(coffee.ImagePath),
+		Price:       coffee.Price,
+		Data:        media.GetBase64(coffee.ImagePath),
 	}
 	return &response, nil
 }

@@ -8,7 +8,7 @@ import (
 type CoffeeInterface interface {
 	FindById(id uuid.UUID) (*dto.OutputCoffee, error)
 	FindAll(pagination, limit int, sort string) ([]dto.OutputCoffee, error)
-	Create(input dto.InputCreateCoffee, path string) (*dto.OutputCoffee, error)
+	Create(input dto.InputCreateCoffee) (*dto.OutputCoffee, error)
 	Update(input dto.InputUpdateCoffee, id uuid.UUID) (*dto.OutputCoffee, error)
 	Delete(id uuid.UUID) error
 }

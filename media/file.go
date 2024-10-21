@@ -1,4 +1,4 @@
-package utils
+package media
 
 import (
 	"encoding/base64"
@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-func SaveImage(data, filePath, label string) (string, error) {
+func SaveImage(data, filePath string, label string) (string, error) {
 	imageData, err := base64.StdEncoding.DecodeString(data)
 	if err != nil {
 		return "", err
@@ -26,4 +26,16 @@ func GetBase64(path string) string {
 		return ""
 	}
 	return base64.StdEncoding.EncodeToString(file)
+}
+
+func UpdateImage(data, path string) error {
+	imageData, err := base64.StdEncoding.DecodeString(data)
+	if err != nil {
+		return err
+	}
+	return os.WriteFile(path, imageData, os.ModePerm)
+}
+
+func DeleteImage(path string) error {
+	return os.Remove(path)
 }
