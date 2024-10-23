@@ -5,6 +5,7 @@ import (
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/dto"
 	"github.com/gin-gonic/gin"
 	"log"
+	"net/http"
 	"strings"
 )
 
@@ -22,13 +23,14 @@ func (f filds) ValidateToken() gin.HandlerFunc {
 	return func(c *gin.Context) {
 		token := c.GetHeader("Authorization")
 		if token == "" {
-			c.AbortWithStatusJSON(401, gin.H{"error": "Token is missing"})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": "Token is missing"})
 			return
 		}
 		tokenString := strings.Split(token, " ")[1]
+		log.Println("tokenString: ", tokenString)
 		err := f.jwt.ValidateToken(tokenString)
 		if err != nil {
-			c.AbortWithStatusJSON(401, gin.H{"error": err.Error()})
+			c.AbortWithStatusJSON(http.StatusUnauthorized, gin.H{"error": err.Error()})
 			return
 		}
 		c.Next()

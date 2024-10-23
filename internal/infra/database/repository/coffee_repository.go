@@ -6,6 +6,7 @@ import (
 	"github.com/LGuilhermeMoreira/loja-de-cafe/media"
 	"github.com/google/uuid"
 	"gorm.io/gorm"
+	"strings"
 )
 
 const (
@@ -81,8 +82,14 @@ func (c *Coffee) Delete(id uuid.UUID) error {
 }
 
 func (c *Coffee) FindAll(pagination, limit int, sort string) ([]dto.OutputCoffee, error) {
+	sort = strings.ToLower(sort)
+
+	if sort != "asc" && sort != "desc" {
+		sort = "asc"
+	}
+
 	var coffees []model.Coffee
-	err := c.DB.Find(&coffees).Offset((pagination - 1) * limit).Order("created_at" + sort).Error
+	err := c.DB.Offset((pagination - 1) * limit).Limit(limit).Order("created_at " + sort).Find(&coffees).Error
 	if err != nil {
 		return nil, err
 	}

@@ -1,7 +1,5 @@
 package dto
 
-import "github.com/google/uuid"
-
 type OutputCoffee struct {
 	Name        string  `json:"name"`
 	Price       float64 `json:"price"`
@@ -19,9 +17,8 @@ type InputCreateCoffee struct {
 }
 
 type InputUpdateCoffee struct {
-	Name        string    `json:"name"`
-	Price       float64   `json:"price"`
-	Description string    `json:"description"`
-	Data        string    `json:"data"`
-	ID          uuid.UUID `uri:"id" binding:"required,uuid"`
+	Name        string  `json:"name"`
+	Price       float64 `json:"price"`
+	Description string  `json:"description"`
+	Data        string  `json:"data"`
 }

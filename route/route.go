@@ -30,5 +30,9 @@ func NewMux(db *gorm.DB, secret string, time int) *gin.Engine {
 	r.POST("/login", userHandler.Login)
 	//coffee
 	r.POST("/coffee/", mw.ValidateTokenAdmin(), coffeeHandler.CreateCoffee)
+	r.PUT("/coffee/:id", mw.ValidateTokenAdmin(), coffeeHandler.UpdateCoffee)
+	r.DELETE("/coffee/", mw.ValidateTokenAdmin(), coffeeHandler.DeleteCoffee)
+	r.GET("/coffee/:id", coffeeHandler.GetCoffee)
+	r.GET("/coffee/", coffeeHandler.ListCoffees)
 	return r
 }

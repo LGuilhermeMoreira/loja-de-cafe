@@ -1,6 +1,6 @@
 # update this variables
-@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNjgwM2M5MzQtMTdkYy00Yzk0LTljMDMtMmZjMjRlZjBiYTU2IiwibmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdCIsImFkbWluIjp0cnVlfSwiZXhwIjoxNzI5NTA1OTUzfQ.GnE8jlS_sRIO1i9hj_XyzMhkFhvRfJ2klIYzFvcoBU8
-@id = 6803c934-17dc-4c94-9c03-2fc24ef0ba56
+@authToken = Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNDliY2JmNDYtYWRhZC00NDgzLWI2Y2ItYzg5NzgzNGRmMWRmIiwibmFtZSI6InRlc3QiLCJlbWFpbCI6InRlc3RAdGVzdCIsImFkbWluIjpmYWxzZX0sImV4cCI6MTcyOTY3ODc1Nn0.FD_SrBqSjquYVL5QuqStgXfhCT0yisShgMSFXyE4a58
+@id = 49bcbf46-adad-4483-b6cb-c897834df1df
 
 ### create user
 POST http://localhost:3000/user
@@ -8,7 +8,7 @@ Content-Type: application/json
 
 {
   "name" : "test",
-  "email" : "test@email.com",
+  "email" : "test@test",
   "password" : "test"
 }
 
@@ -27,6 +27,6 @@ Content-Type: application/json
 Authorization: {{authToken}}
 
 {
-  "name" : "test updated",
-  "password" : "test updated"
+  "name" : "test updated XXX",
+  "password" : "test updated XXX"
 }
