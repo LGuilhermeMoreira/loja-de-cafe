@@ -6,7 +6,7 @@ import (
 )
 
 type Coffee struct {
-	ID          uuid.UUID `gorm:"primaryKey;unique"`
+	Id          uuid.UUID `gorm:"primaryKey;unique"`
 	Name        string    `gorm:"not null"`
 	Price       float64   `gorm:"not null"`
 	Description string    `gorm:"not null"`
@@ -17,7 +17,7 @@ type Coffee struct {
 
 func NewCoffee(price float64, description, path, name string) *Coffee {
 	return &Coffee{
-		ID:          uuid.New(),
+		Id:          uuid.New(),
 		Name:        name,
 		Price:       price,
 		Description: description,

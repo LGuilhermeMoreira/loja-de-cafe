@@ -17,17 +17,14 @@ type User struct {
 }
 
 func NewUser(name, email, password string, admin bool) (*User, error) {
-	id := uuid.New()
 
 	hashPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
-
 	if err != nil {
 		return nil, err
 	}
-
 	return &User{
 		Admin:    admin,
-		Id:       id,
+		Id:       uuid.New(),
 		Name:     name,
 		Email:    email,
 		Password: string(hashPassword),
