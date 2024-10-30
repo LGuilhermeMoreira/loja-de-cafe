@@ -8,6 +8,8 @@ import (
 var models = []interface{}{
 	model.User{},
 	model.Coffee{},
+	model.CartItem{},
+	model.ShoppingCart{},
 }
 
 func Migration(db *gorm.DB) error {
