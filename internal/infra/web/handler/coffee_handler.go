@@ -3,7 +3,6 @@ package handler
 import (
 	"encoding/json"
 	"errors"
-	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/auth"
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/dto"
 	_interface "github.com/LGuilhermeMoreira/loja-de-cafe/internal/infra/database/interface"
 	"github.com/gin-gonic/gin"
@@ -16,13 +15,11 @@ const path = "./images/"
 
 type CoffeeHandler struct {
 	CoffeeInterface _interface.CoffeeInterface
-	JWTInterface    auth.JWTInterface[dto.OutputUser]
 }
 
-func NewCoffeeHandler(coffeeInterface _interface.CoffeeInterface, jwtInterface auth.JWTInterface[dto.OutputUser]) *CoffeeHandler {
+func NewCoffeeHandler(coffeeInterface _interface.CoffeeInterface) *CoffeeHandler {
 	return &CoffeeHandler{
 		CoffeeInterface: coffeeInterface,
-		JWTInterface:    jwtInterface,
 	}
 }
 

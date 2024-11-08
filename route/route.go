@@ -19,7 +19,8 @@ func NewMux(db *gorm.DB, secret string, time int) *gin.Engine {
 	userHandler := handler.NewUserHandler(userRepository, JWT)
 	// coffee
 	coffeeRepository := repository.NewCoffeeRepository(db)
-	coffeeHandler := handler.NewCoffeeHandler(coffeeRepository, JWT)
+	coffeeHandler := handler.NewCoffeeHandler(coffeeRepository)
+	// shopping cart
 
 	gin.SetMode(gin.ReleaseMode)
 	r := gin.Default()

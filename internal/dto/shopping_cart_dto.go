@@ -7,8 +7,12 @@ type InputAddItemShoppingCartDto struct {
 }
 
 type OutputShoppingCartDto struct {
-	TotalPrice float64                      `json:"total_price"`
-	CoffeeList map[string]OutputCartItemDto `json:"coffee_list"`
+	TotalPrice   float64                      `json:"total_price"`
+	CartItemList map[string]OutputCartItemDto `json:"coffee_list"`
+}
+
+type OutputCreateShoppingCartDto struct {
+	Id string `json:"shopping_cart_id"`
 }
 
 type OutputCartItemDto struct {
