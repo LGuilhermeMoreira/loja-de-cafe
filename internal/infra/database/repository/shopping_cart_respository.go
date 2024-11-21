@@ -37,7 +37,7 @@ func (s *ShoppingCartRespository) AddItem(id uuid.UUID, input dto.InputAddItemSh
 	if err != nil {
 		return nil, err
 	}
-	var response map[string]dto.OutputCartItemDto
+	var response = make(map[string]dto.OutputCartItemDto)
 	var totalPrice float64 = 0
 	for _, cartItem := range cartItems {
 		response[cartItem.Id.String()] = dto.OutputCartItemDto{
