@@ -3,15 +3,14 @@ package handler
 import (
 	"encoding/json"
 	"errors"
+	"net/http"
+	"strconv"
+
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/dto"
 	_interface "github.com/LGuilhermeMoreira/loja-de-cafe/internal/infra/database/interface"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
-	"net/http"
-	"strconv"
 )
-
-const path = "./images/"
 
 type CoffeeHandler struct {
 	CoffeeInterface _interface.CoffeeInterface
