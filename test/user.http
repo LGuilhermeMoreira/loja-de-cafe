@@ -17,8 +17,8 @@ POST http://localhost:3000/login
 Content-Type: application/json
 
 {
-  "email" : "test@test",
-  "password" : "test"
+  "email" : "adim@adimin",
+  "password" : "123"
 }
 
 ### update user

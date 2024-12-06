@@ -1,7 +1,7 @@
 ### create coffee
 POST http://localhost:3000/coffee/
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNDliY2JmNDYtYWRhZC00NDgzLWI2Y2ItYzg5NzgzNGRmMWRmIiwibmFtZSI6InRlc3QgdXBkYXRlZCBYWFgiLCJlbWFpbCI6InRlc3RAdGVzdCIsImFkbWluIjp0cnVlfSwiZXhwIjoxNzI5Njg1Njg1fQ.rP5Z8mOWkgiGVVrut7XbEdiD2_mWf575N79C_aqWXs0
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiNjBlMmM5NDItMmE2Zi00NzczLWIzNTctYmQ2ZTAwMGU0MTVlIiwibmFtZSI6ImFkbWluIiwiZW1haWwiOiJhZGltQGFkaW1pbiIsImFkbWluIjp0cnVlfSwiZXhwIjoxNzQ1NzkyMzQ2fQ.E5yRpRnE2qXy1toWs8h767CwpUuKzKAYoYkCpB9kYyU
 
 {
   "name": "café original",
@@ -30,7 +30,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7ImlkIjoiN
   "data": "iVBORw0KGgoAAAANSUhEUgAAAB8AAAAdCAIAAADdBCBlAAAACXBIWXMAAA7EAAAOxAGVKw4bAAAB6UlEQVRIiWPU0bFmoBlgop3Ro6YPmOks2O1k/G8j80GQ4zeE+/Eny4FHQlQzPcvocbrBY2SRaefkpp+XJcVkRi4ZfeymK/J/x7DvUZbRI2SRb7+ZKw6o7cfuJ2Ypp5yKIH7spmMHHPwM/HJwHhcDQ7Qz/83tfM9efERXyaLm5i91bnodKaYrOjCIajKIqjP8+cnAJ83AwGDOwJDIf751wk4MpSwsLP//MjGRkmb+/mYQkGNg5WJg54OL/fr1B4vKP9e2rnlqkF1Pitvv7mV4dgZZ4PATwek7ZLA65Pn+KZW39EgxXdWNQc6KQUCW4e9vBi4RBgYGWwaGPJmzbRN3Y1P9/9vTi5Tmpv///2MKMgqq2TnrijPjSO/Ywe2dDE9OIgscfiI4eYc0FpV/BPSDI8xYJmI3/f5HTiyiKq4M6t4MXMIM//4ysPMyMDDYMjBkS57pnLIHTeH/z6cXTZNMSyzHbvq0c7IXX/IKcf5GFrRil5RjeierzPv7128RcV6IIAsLMzYD/n+8srG7eDMj8XWTID+XiqIImuCT5x+ev/yESwsJppMBhnL5Pmr6wJhOSklACDAyMunr6/Ly8kC4X79+xWe6pqb69es3iTc9ONg/IMAXWQRnyBgbG1RXlwcF+RNvupSUJJoIAPOlhPQD/3/oAAAAAElFTkSuQmCC"
 }
 ###
-DELETE localhost:3000/coffee/{{id}}
+DELETE localhost:3000/coffee/
 Content-Type: application/json
-Authorization: Bearer {{authToken}}
+Authorization: Bearer 
 ###
