@@ -3,15 +3,17 @@ package main
 import (
 	"errors"
 	"fmt"
+	"net/http"
+	"os"
+
 	"github.com/LGuilhermeMoreira/loja-de-cafe/configuration"
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/infra/database/connection"
 	"github.com/LGuilhermeMoreira/loja-de-cafe/internal/infra/database/migration"
 	"github.com/LGuilhermeMoreira/loja-de-cafe/route"
 	"github.com/joho/godotenv"
-	"net/http"
-	"os"
 )
 
+// testando commit
 func main() {
 	// image bucket
 	err := os.MkdirAll("./images", 0755)
